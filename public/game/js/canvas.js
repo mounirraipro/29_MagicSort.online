@@ -56,11 +56,11 @@ function buildGameCanvas() {
     confirmContainer = new createjs.Container();
 
 
-    bg = new createjs.Bitmap(loader.getResult('background'));
-    bgP = new createjs.Bitmap(loader.getResult('backgroundP'));
+    bg = new createjs.Shape();
+    bgP = new createjs.Shape();
 
-    logo = new createjs.Bitmap(loader.getResult('logo'));
-    logoP = new createjs.Bitmap(loader.getResult('logoP'));
+    logo = new createjs.Container();
+    logoP = new createjs.Container();
 
     themeBackdrop = new createjs.Shape();
     themeGlowLeft = new createjs.Shape();
@@ -230,15 +230,9 @@ function buildGameCanvas() {
     resultDescTxt.visible = false;
 
 
-    buttonFacebook = new createjs.Bitmap(loader.getResult('buttonFacebook'));
-    buttonTwitter = new createjs.Bitmap(loader.getResult('buttonTwitter'));
-    buttonWhatsapp = new createjs.Bitmap(loader.getResult('buttonWhatsapp'));
-    centerReg(buttonFacebook);
-    createHitarea(buttonFacebook);
-    centerReg(buttonTwitter);
-    createHitarea(buttonTwitter);
-    centerReg(buttonWhatsapp);
-    createHitarea(buttonWhatsapp);
+    buttonFacebook = createShareButton('f', '#F6ECE1', '#D8B196');
+    buttonTwitter = createShareButton('X', '#F6ECE1', '#D8B196');
+    buttonWhatsapp = createShareButton('WA', '#F6ECE1', '#D8B196');
 
     buttonFullscreen = createMiniButton('FULL', 64, 48, '#F8EEE4', '#D8B196');
     buttonSoundOn = createMiniButton('SFX', 64, 48, '#F0E7DC', '#BFA79A');
@@ -511,6 +505,13 @@ function createMiniButton(label, width, height, fillColor, accentColor) {
     button.regX = width / 2;
     button.regY = height / 2;
     button.label = labelTxt;
+    return button;
+}
+
+function createShareButton(label, fillColor, accentColor) {
+    var button = createMiniButton(label, 62, 52, fillColor, accentColor);
+    button.label.font = label.length > 1 ? '16px comicyregular' : '24px comicyregular';
+    button.label.x = label.length > 1 ? 35 : 31;
     return button;
 }
 
